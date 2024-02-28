@@ -767,6 +767,27 @@ Success!
 ***TODO:*** Take a screenshot of running the passing unit test.
 
 
+### Step 5: Commit our changes
+
+After working on our code and fixing a bug, or getting another unit test to pass, it is always good practice to commit our code to our git repository.
+This allows us to make sure that if we run into any problems when developing for the next test, or with our repo in general, we can simply roll back the changes.
+You can search for more details on your own (hint: `git restore ...`), but for now we want to run a commit:
+
+```shell
+[DOCKER] /tmp/lab/labs/lab2/ $ git commit . -m "Commit after lab1"
+[main 4dacf3c] Commit after lab1
+ 1 file changed, 1 insertion(+)
+```
+
+The command we are using is of the form `git commit [file or directory to commit] -m [message to include with the commit]`.
+You should change your message to include useful information that you can look back on.
+
+Every time you get a new test passing or finish an assignment or lab it is good practice to commit your code.
+This also means if I push updates you won't run into as many issues.
+
+
+
+
 ### Conclusion
 
 We've now walked through how to use GDB, at least in a basic way.
