@@ -138,24 +138,24 @@ Because this folder was mounted with the `-v ${PWD}:/tmp/lab` flag when we start
 
 Type the following into your terminal:
 ```bash
-git clone https://github.com/samogden/CST334-assignments
+git clone https://github.com/samogden/CST334-assignments-online
 ```
 
 This will download the a git repository containing the lab data files.
 To change to the directory containing the files for this lab (including a copy of this file) run the below commands.
 
 ```bash
-cd CST334-assignments
+cd CST334-assignments-online
 cd labs
-cd lab1-intro_to_c
+cd lab1-debugging_with_gdb
 ```
 
-Note that you can run all of these commands on a single line as `cd CST334-assignments/labs/lab1-intro_to_c`.
+Note that you can run all of these commands on a single line as `cd CST334-assignments-online/labs/lab1-debugging_with_gdb`.
 
 ## Step 3: Open the starter code
 
 To open the starter code you should navigate in your host operating system (e.g. windows or OSX) to the same directory as your terminal instance is.
-That is, in the directory you started docker in click folders until you are in the `lab1-intro_to_c` directory.
+That is, in the directory you started docker in click folders until you are in the `lab1-debugging_with_gdb` directory.
 
 
 
