@@ -515,7 +515,7 @@ __pthread_kill_implementation (threadid=281474842214432, signo=signo@entry=6, no
 ***Note:***
 It seems that sometimes the stack smashing fails right here and instead your program completes normally.
 If that happens to you then I'm sorry I didn't succeed in causing an error on your computer, and I'd love to try to figure out why so stop by office hours sometime.
-In the meantime, just read along for the next section until we get to [Section 3b where we recompile and set a breakpoint](#step-3b-compiling-for-gdb).
+In the meantime, just read along for the next section until we get to [Section 7b where we recompile and set a breakpoint](#step-7b-compiling-for-gdb).
 
 What we see is that the program still crashes (sometimes it doesn't because gdb makes a few tweaks to memory layout to simply debugging), and is killed.
 To see a bit of information about _why_ let's call `backtrace` (or `bt`) to ask what sequence of calls was made.
