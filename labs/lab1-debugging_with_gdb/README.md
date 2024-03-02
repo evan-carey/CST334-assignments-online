@@ -470,7 +470,7 @@ The first tool we'll be using is [GDB](https://www.sourceware.org/gdb/), aka the
 To start up GDB we simply type `gdb [program name]` and it launches the debugger with that program as it's input.
 
 ```shell
-[DOCKER] /tmp/lab/labs/lab2/ $ gdb debug
+[DOCKER] /tmp/lab/labs/lab2/ $ gdb ./debug
 GNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1
 Copyright (C) 2022 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
