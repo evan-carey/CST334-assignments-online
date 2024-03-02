@@ -819,3 +819,8 @@ Finally, I have two followup questions!
 Please submit your google doc where you've been collecting todos!
 
 
+## Bonus Reading
+
+- Building a stack on [arm64](https://stackoverflow.com/a/66148895)
+- Building a stack in [x86-64](http://6.s081.scripts.mit.edu/sp18/x86-64-architecture-guide.html)
+
