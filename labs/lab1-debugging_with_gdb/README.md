@@ -371,7 +371,7 @@ For a problem like this a full debug is potentially overkill but it's good to go
 Okay!
 So let's grab this snippet of code and make use of our `debug.c`.
 The idea is that we can move the problematic piece of code over there and poke at it a bit more to see what's going wrong.
-Let's copy lines 15-21 over into our main function as such:
+Let's copy lines 27-32 over into our main function as such:
 
 ```c
  1	#include "src/student_code.h"
