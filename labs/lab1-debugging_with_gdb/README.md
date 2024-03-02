@@ -702,7 +702,7 @@ So let's look at our buffers by looking at our `student_code.h` file.
 3
 4	typedef struct Person {
 5	    int age;
-6	    char name[8];
+6	    char name[9];
 7	    int favorite_number;
 8	} Person;
 9
