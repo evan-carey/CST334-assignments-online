@@ -40,3 +40,9 @@ ReportHook(TEST_CRASH)(struct criterion_test_stats *stats) {
       log_error("%d\n", stats->signal);
   }
 }
+
+
+ReportHook(PRE_ALL)(struct criterion_test_set *test) {
+  srand(time(NULL));
+}
+
