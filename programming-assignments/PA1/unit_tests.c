@@ -11,7 +11,7 @@
 TestSuite(String, .disabled=false);
 TestSuite(Struct, .disabled=false);
 TestSuite(CaesarCipher, .disabled=false);
-TestSuite(SubstitutionrCipher, .disabled=false);
+TestSuite(SubstitutionCipher, .disabled=false);
 
 // From: https://github.com/codewars/criterion-hooks/blob/main/criterion-hooks.c
 // PRE_TEST: occurs after the test initialization, but before the test is run.
