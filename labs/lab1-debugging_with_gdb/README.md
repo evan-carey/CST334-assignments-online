@@ -284,11 +284,11 @@ Let's check out our unit test file.
 24
 25	Test(Person, make_new_person_badly, .disabled=false) {
 26	    // Next we poke around at our expectations a bit
-27	    Person p2 = make_new_person(27, "Douglas Adams", 42);
+27	    Person p2 = make_new_person(27, "Douglas Noel Adams", 42);
 28
 29	    //Next, we test to make sure it worked correctly
 30	    cr_assert(p2.age == 27); // Test age
-31	    cr_assert(strcmp(p2.name, "Douglas Adams") == 0); // Note that we use the strcmp function
+31	    cr_assert(strcmp(p2.name, "Douglas Noel Adams") == 0); // Note that we use the strcmp function
 32	    cr_assert(p2.favorite_number == 42); // Test favorite number
 33	}
 ```
@@ -324,11 +324,11 @@ For the crash, we just got told that the last good line was line 25 so let's loo
 ```c
 25	Test(Person, make_new_person_badly, .disabled=false) {
 26	    // Next we poke around at our expectations a bit
-27	    Person p2 = make_new_person(27, "Douglas Adams", 42);
+27	    Person p2 = make_new_person(27, "Douglas Noel Adams", 42);
 28
 29	    //Next, we test to make sure it worked correctly
 30	    cr_assert(p2.age == 27); // Test age
-31	    cr_assert(strcmp(p2.name, "Douglas Adams") == 0); // Note that we use the strcmp function
+31	    cr_assert(strcmp(p2.name, "Douglas Noel Adams") == 0); // Note that we use the strcmp function
 32	    cr_assert(p2.favorite_number == 42); // Test favorite number
 33	}
 ```
@@ -378,11 +378,11 @@ Let's copy lines 27-32 over into our main function as such:
  2
  3	int main() {
  4	    // Next we poke around at our expectations a bit
- 5	    Person p2 = make_new_person(27, "Douglas Adams", 42);
+ 5	    Person p2 = make_new_person(27, "Douglas Noel Adams", 42);
  6
  7	    //Next, we test to make sure it worked correctly
  8	    cr_assert(p2.age == 27); // Test age
- 9	    cr_assert(strcmp(p2.name, "Douglas Adams") == 0); // Note that we use the strcmp function
+ 9	    cr_assert(strcmp(p2.name, "Douglas Noel Adams") == 0); // Note that we use the strcmp function
 10	    cr_assert(p2.favorite_number == 42); // Test favorite number
 11
 12	    return 0;
@@ -399,7 +399,7 @@ debug.c:8:5: warning: implicit declaration of function 'cr_assert' [-Wimplicit-f
     8 |     cr_assert(p2.age == 27); // Test age
       |     ^~~~~~~~~
 debug.c:9:15: warning: implicit declaration of function 'strcmp' [-Wimplicit-function-declaration]
-    9 |     cr_assert(strcmp(p2.name, "Douglas Adams") == 0); // Note that we use the strcmp function
+    9 |     cr_assert(strcmp(p2.name, "Douglas Noel Adams") == 0); // Note that we use the strcmp function
       |               ^~~~~~
 debug.c:2:1: note: include '<string.h>' or provide a declaration of 'strcmp'
     1 | #include "src/student_code.h"
@@ -426,7 +426,7 @@ This makes our tests look like the below:
 
 ```c
 printf("%d\n", (p2.age == 27)); // Test age
-printf("%d\n", (strcmp(p2.name, "Douglas Adams") == 0)); // Note that we use the strcmp function
+printf("%d\n", (strcmp(p2.name, "Douglas Noel Adams") == 0)); // Note that we use the strcmp function
 printf("%d\n", (p2.favorite_number == 42)); // Test favorite number
 ```
 
@@ -441,7 +441,7 @@ gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4
 gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ debug.c -o debug bin/student_code.o
 debug.c: In function 'main':
 debug.c:10:21: warning: implicit declaration of function 'strcmp' [-Wimplicit-function-declaration]
-   10 |     printf("%d\n", (strcmp(p2.name, "Douglas Adams") == 0)); // Note that we use the strcmp function
+   10 |     printf("%d\n", (strcmp(p2.name, "Douglas Noel Adams") == 0)); // Note that we use the strcmp function
       |                     ^~~~~~
 debug.c:3:1: note: include '<string.h>' or provide a declaration of 'strcmp'
     2 | #include "src/student_code.h"
@@ -588,7 +588,7 @@ However, this time run the `backtrace` command and you'll see more information.
     at ../sysdeps/posix/libc_fatal.c:155
 #5  0x0000fffff7ec5898 in __GI___fortify_fail (msg=msg@entry=0xfffff7f23790 "stack smashing detected") at ./debug/fortify_fail.c:26
 #6  0x0000fffff7ec5864 in __stack_chk_fail () at ./debug/stack_chk_fail.c:24
-#7  0x0000aaaaaaaa0a64 in make_new_person (age=27, name=0xaaaaaaaa0a90 "Douglas Adams", favorite_number=42) at src/student_code.c:15
+#7  0x0000aaaaaaaa0a64 in make_new_person (age=27, name=0xaaaaaaaa0a90 "Douglas Noel Adams", favorite_number=42) at src/student_code.c:15
 #8  0x0000aaaaaaaa0944 in main () at debug.c:7
 ```
 
@@ -609,7 +609,7 @@ Starting program: /tmp/lab/labs/lab2/debug
 [Thread debugging using libthread_db enabled]
 Using host libthread_db library "/lib/aarch64-linux-gnu/libthread_db.so.1".
 
-Breakpoint 1, make_new_person (age=27, name=0xaaaaaaaa0a90 "Douglas Adams", favorite_number=42) at src/student_code.c:9
+Breakpoint 1, make_new_person (age=27, name=0xaaaaaaaa0a90 "Douglas Noel Adams", favorite_number=42) at src/student_code.c:9
 9	Person make_new_person(int age, char* name, int favorite_number) {
 ```
 
@@ -646,7 +646,7 @@ To do this we enter `finish` to skip over all of its steps.
 ```shell
 (gdb) finish
 Run till exit from #0  strcpy () at ../sysdeps/aarch64/strcpy.S:79
-make_new_person (age=27, name=0xaaaaaaaa0a90 "Douglas Adams", favorite_number=42) at src/student_code.c:13
+make_new_person (age=27, name=0xaaaaaaaa0a90 "Douglas Noel Adams", favorite_number=42) at src/student_code.c:13
 13	    p.favorite_number = favorite_number;
 (gdb) info locals
 p = {age = 27, name = "Douglas ", favorite_number = 1835099201}
@@ -686,7 +686,7 @@ Hmmmm.
 
 Based on what we've seen until now we know that something is wrong with how we're using the `strcpy` function.
 Even though it's a library function it's somehow messing something up.
-The biggest hint we have is that it's somehow dropping the "Adams" part of "Douglas Adams" when using `strcpy`, and changing whatever is after that in memory.
+The biggest hint we have is that it's somehow dropping the "Adams" part of "Douglas Noel Adams" when using `strcpy`, and changing whatever is after that in memory.
 
 This hint points us to something to do with buffer sizes.
 Usually when we see that:
