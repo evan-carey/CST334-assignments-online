@@ -100,7 +100,7 @@ Next, we have some fanciness and then the actual function itself.
 This function is fairly straight forward -- we're just making a new instance of a `Person` struct, setting some parts of it and then returning the memory object.
 The only time we don't do this directly ourselves is when we use the library function `strcpy` which copies null terminated strings from one memory location to another.
 
-***TODO:*** Go check out the documentation for [strcpy]([https://pubs.opengroup.org/onlinepubs/009696799/functions/strcpy.html](https://linux.die.net/man/3/strcpy)).
+***TODO:*** Go check out the documentation for [strcpy](https://linux.die.net/man/3/strcpy).
 Does anything jump out at you?
 
 Overall, this looks pretty okay and basic.
@@ -169,8 +169,8 @@ Running it we get the below:
 [DOCKER] /tmp/lab/labs/lab2/ $ make
 rm -rf bin unit_tests debug
 mkdir -p bin
-gcc -Wall -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ -c src/student_code.c -o bin/student_code.o
-gcc -Wall -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ unit_tests.c -o unit_tests bin/student_code.o
+gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ -c src/student_code.c -o bin/student_code.o
+gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ unit_tests.c -o unit_tests bin/student_code.o
 ./unit_tests
 [----] tests/tests-person.c:25: Assertion Failed
 [----]
@@ -208,8 +208,8 @@ The command has two parts.
      
      2	mkdir -p bin
      
-     3	gcc -Wall -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ -c src/student_code.c -o bin/student_code.o
-     4	gcc -Wall -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ unit_tests.c -o unit_tests bin/student_code.o
+     3	gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ -c src/student_code.c -o bin/student_code.o
+     4	gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ unit_tests.c -o unit_tests bin/student_code.o
      
      5	./unit_tests
      6	[----] tests/tests-person.c:20: Assertion Failed
@@ -348,8 +348,8 @@ Set the `.disabled` on the first test to be`true` (and remember to turn it on ag
 [DOCKER] /tmp/lab/labs/lab2/ $ make 2>&1 | cat -n
      1	rm -rf bin unit_tests debug
      2	mkdir -p bin
-     3	gcc -Wall -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ -c src/student_code.c -o bin/student_code.o
-     4	gcc -Wall -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ unit_tests.c -o unit_tests bin/student_code.o
+     3	gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ -c src/student_code.c -o bin/student_code.o
+     4	gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ unit_tests.c -o unit_tests bin/student_code.o
      5	./unit_tests
      6	*** stack smashing detected ***: terminated
      7	[----] tests/tests-person.c:25: Unexpected signal caught below this line!
@@ -371,7 +371,7 @@ For a problem like this a full debug is potentially overkill but it's good to go
 Okay!
 So let's grab this snippet of code and make use of our `debug.c`.
 The idea is that we can move the problematic piece of code over there and poke at it a bit more to see what's going wrong.
-Let's copy lines 15-21 over into our main function as such:
+Let's copy lines 27-32 over into our main function as such:
 
 ```c
  1	#include "src/student_code.h"
@@ -393,7 +393,7 @@ After we've done this let's run a `make debug`, which calls a special make rule 
 
 ```shell
 [DOCKER] /tmp/lab/labs/lab2/ $ make debug
-gcc -Wall -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ debug.c -o debug bin/student_code.o
+gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ debug.c -o debug bin/student_code.o
 debug.c: In function 'main':
 debug.c:8:5: warning: implicit declaration of function 'cr_assert' [-Wimplicit-function-declaration]
     8 |     cr_assert(p2.age == 27); // Test age
@@ -437,8 +437,8 @@ Running this again we see we've still got an issue, but GCC has suggestions for 
 ```shell
 [DOCKER] /tmp/lab/labs/lab2/ $ make debug
 mkdir -p bin
-gcc -Wall -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ -c src/student_code.c -o bin/student_code.o
-gcc -Wall -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ debug.c -o debug bin/student_code.o
+gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ -c src/student_code.c -o bin/student_code.o
+gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ debug.c -o debug bin/student_code.o
 debug.c: In function 'main':
 debug.c:10:21: warning: implicit declaration of function 'strcmp' [-Wimplicit-function-declaration]
    10 |     printf("%d\n", (strcmp(p2.name, "Douglas Adams") == 0)); // Note that we use the strcmp function
@@ -453,7 +453,7 @@ We can just follow it's suggestions and add in the `string.h` library and we sho
 
 ```shell
 [DOCKER] /tmp/lab/labs/lab2/ $ make debug
-gcc -Wall -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ debug.c -o debug bin/student_code.o
+gcc -Wall -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ debug.c -o debug bin/student_code.o
 [DOCKER] /tmp/lab/labs/lab2/ $ ./debug
 *** stack smashing detected ***: terminated
 Aborted
@@ -470,7 +470,7 @@ The first tool we'll be using is [GDB](https://www.sourceware.org/gdb/), aka the
 To start up GDB we simply type `gdb [program name]` and it launches the debugger with that program as it's input.
 
 ```shell
-[DOCKER] /tmp/lab/labs/lab2/ $ gdb debug
+[DOCKER] /tmp/lab/labs/lab2/ $ gdb ./debug
 GNU gdb (Ubuntu 12.1-0ubuntu1~22.04) 12.1
 Copyright (C) 2022 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -567,7 +567,7 @@ Let's do a slightly modification to our Makefile to have it compile with some ex
 This is already turned on in the projects but I wanted to have an excuse to talk about it.
 In your Makefile goto line 2 and after `-Wall` add in a `-g` flag so it reads:
 ```makefile
-CFLAGS=-Wall -g -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/
+CFLAGS=-Wall -g -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/
 ```
 
 This flag will add in some extra information that gdb uses.
@@ -749,7 +749,7 @@ Making this change and re-running we see that our debug now runs successfully!
 
 ```shell
 [DOCKER] /tmp/lab/labs/lab2/ $ make debug
-gcc -Wall -g -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ debug.c -o debug bin/student_code.o
+gcc -Wall -g -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ debug.c -o debug bin/student_code.o
 [DOCKER] /tmp/lab/labs/lab2/ $ ./debug
 1
 1
@@ -761,8 +761,8 @@ Let's try out our unit tests!
 [DOCKER] /tmp/lab/labs/lab2/ $ make
 rm -rf bin unit_tests debug
 mkdir -p bin
-gcc -Wall -g -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ -c src/student_code.c -o bin/student_code.o
-gcc -Wall -g -lcriterion -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ unit_tests.c -o unit_tests bin/student_code.o
+gcc -Wall -g -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ -c src/student_code.c -o bin/student_code.o
+gcc -Wall -g -lcriterion -fstack-protector-all -I/opt/homebrew/Cellar/criterion/2.4.1_2/include/ unit_tests.c -o unit_tests bin/student_code.o
 ./unit_tests
 [====] Synthesis: Tested: 1 | Passing: 1 | Failing: 0 | Crashing: 0
 ```
