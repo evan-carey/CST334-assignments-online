@@ -113,8 +113,8 @@ struct Group;                                                       // 5 points
 Person person_make_new(char* first_name, char* last_name, int age); // 4 points
 char* person_to_string(Person person);                              // 2 points
 Group group_make_new(char* group_name);                             // 3 points
-int num_people_in_group(Group* group);                              // 2 points
-int free_spaces_in_group(Group* group);                             // 4 points
+int num_people_in_group(Group group);                               // 2 points
+int free_spaces_in_group(Group group);                              // 4 points
 int add_person(Group* group, Person* person_to_add);                // 4 points
 int remove_person(Group* group, Person* person_to_remove);          // 1 point
 ```
