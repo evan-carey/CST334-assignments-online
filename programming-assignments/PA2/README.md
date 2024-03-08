@@ -38,10 +38,10 @@ If we cut it down a bit using a few tricks we've learned in class I can show you
 
 ```shell
 [DOCKER] /tmp/programming/ $ make 2>&1 | tail -n5
-[----]   The expression selected == p2 is false.
 [----]
-[FAIL] STCF::e1_e1_e0: (0.00s)
-[====] Synthesis: Tested: 45 | Passing: 1 | Failing: 44 | Crashing: 0
+[FAIL] STCF::test_2proc_0entry_1entry_stcf: (0.00s)
+-----------------------------------
+[====] Synthesis: Tested: 51 | Passing: 1 | Failing: 50 | Crashing: 0
 make: *** [Makefile:17: all] Error 1
 ```
 
