@@ -10,7 +10,7 @@ In this lab we'll be talking about compilation flags and we'll be trying out a t
 
 ## Getting Started
 
-First things first, create a google document called "Lab2".
+First things first, create a google document called "Lab1".
 You will be saving screenshots and other responses in this document and submit it on canvas after we're done!
 
 ### Lab files
@@ -27,7 +27,7 @@ Let's dig into a few of these files now.
 The first file we'll be looking at is [`unit_tests.c`](unit_tests.c), the source code of which we can see below
 
 ```shell
-[DOCKER] /tmp/lab/labs/lab2/ $ cat -n unit_tests.c
+[DOCKER] /tmp/lab/labs/lab1/ $ cat -n unit_tests.c
      1	#include <criterion/criterion.h>
      2
      3	#include "tests/tests-person.c"
@@ -56,7 +56,7 @@ The second file is called `debug.c` and is meant to help us isolate problems in 
 Below we can see what it currently consists of.
 
 ```shell
-[DOCKER] /tmp/lab/labs/lab2/ $ cat -n debug.c
+[DOCKER] /tmp/lab/labs/lab1/ $ cat -n debug.c
      1	#include "src/student_code.h"
      2
      3	int main() {
