@@ -102,7 +102,7 @@ For this, we look at the 4th entry (since we start indexing at 0), and see it is
 The page table entry is `0x80000005` (`0b10000000000000000000000000000101`) has the leftmost bit as 1, so it is valid.
 Note, I didn't convert this to binary except as an example, since the leading hex 8 indicates the leading bit is a 1.
 
-Taking this, we know that our PFN is 5bits, which means we'd need 2 hex digits to represent it, so our PFN is 0x05`.
+Taking that we know that our PFN is 5bits, which means we'd need 2 hex digits to represent it, so our PFN is 0x05`.
 
 </details>
 
