@@ -12,7 +12,9 @@ Thanks to Dr. Glenn Bruns for this lab.
 For each of the questions below you should calculate the answer and show your work.
 Please open up a google document to track your answers, and then when you are finished submit the google document.
 
-## Background or all questions
+We will first in Q1 be computing the various components of the address spaces, and then using these answers in the next few questions.
+
+## Background for all questions
 
 We are going to assume the following;
 - Pages are 256bytes in size
